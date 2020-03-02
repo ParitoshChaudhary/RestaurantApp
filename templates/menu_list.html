@@ -6,5 +6,27 @@
 {% endblock title %}
 
 {% block content %}
-    {{ add_item }}
+    <br>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cuisine</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.cuisine }}</td>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.cost }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

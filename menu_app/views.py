@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from menu_app.models import Item as ItemList, Category, Cuisine
-from menu_app.forms import ItemForm
+from menu_app.forms import ItemForm, CategoryForm, CuisineForm
 from django.contrib import messages
 
 
@@ -22,19 +22,19 @@ def menu_list(request):
 @login_required()
 def add_item(request):
     if request.method == 'POST':
-        form = ItemForm(request.POST or None)
-        print(form.data['name'])
-        print(form.data['cuisine'])
-        print(form.data['category'])
-        print(form.data['cost'])
-
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.name = form.data['name']
-            item.cuisine = form.data['cuisine']
-            item.category = form.data['category']
-            item.cost = form.data['cost']
+        itemform = ItemForm(request.POST or None)
+        catform = CategoryForm(request.POST or None)
+        cuisineform = CuisineForm(request.POST or None)
+        if itemform.is_valid():
+            item = itemform.save(commit=False)
+            cat = catform.save(commit=False)
+            item.name = request.POST.get('name')
+            item.cost = request.POST.get('cost')
+            cat.category_type = request.POST.get('category')
             item.save()
+            cat.save()
+            
+
             messages.success(request, 'Item added successfully!!')
         else:
             messages.warning(request, 'Unable to add the item.')
@@ -50,3 +50,11 @@ def add_item(request):
             'cuisine': cuisine
         }
         return render(request, 'add_item.html', context)
+
+
+def edit_item(request):
+    pass
+
+
+def delete_item(request):
+    pass

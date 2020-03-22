@@ -25,8 +25,8 @@ class Category(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=50)
     cost = models.IntegerField()
-    cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    cuisine = models.ForeignKey('Cuisine', on_delete='models.CASCADE')
+    category = models.ForeignKey('Category', on_delete='models.CASCADE')
 
     def __str__(self):
         return self.name

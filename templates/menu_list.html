@@ -11,6 +11,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Cuisine</th>
                     <th scope="col">Category</th>
@@ -20,6 +21,7 @@
             <tbody>
                 {% for item in items %}
                     <tr>
+                        <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.cuisine }}</td>
                         <td>{{ item.category }}</td>
